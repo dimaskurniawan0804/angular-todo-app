@@ -9,9 +9,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NotFoundComponent } from '../404/not-found.component';
 
 @NgModule({
-  declarations: [LoginComponent, AuthComponent, RegisterComponent],
+  declarations: [
+    LoginComponent,
+    AuthComponent,
+    RegisterComponent,
+    NotFoundComponent,
+  ],
   imports: [
     CommonModule,
     AuthRoutingModule,

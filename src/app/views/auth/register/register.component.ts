@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   hide = false;
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [
@@ -50,15 +51,11 @@ export class LoginComponent implements OnInit {
     return;
   }
 
-  signIn() {
-    this.authService.signIn(this.email.value, this.password.value).subscribe({
-      next: (res) => {
-        console.log(res);
-        localStorage.setItem('isLogin', 'true');
-      },
-      error: (error) => {
-        console.log(error);
-      },
+  signUp() {
+    console.log('click sign up');
+    this.authService.signUp(this.email.value, this.password.value).subscribe({
+      next: (result) => console.log(result),
+      error: (err) => window.alert(err.message),
     });
   }
 }

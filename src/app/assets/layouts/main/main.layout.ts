@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./main.layout.scss'],
   template: `
     <div id="main-layout-wrapper">
-      <h1>USE MAIN LAYOUT</h1>
       <router-outlet></router-outlet>
     </div>
   `,

@@ -1,5 +1,5 @@
 <div id="login-main-wrapper">
-  <h5>Sign In</h5>
+  <h5>Sign Up</h5>
   <div class="input-area">
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
@@ -7,6 +7,7 @@
       <mat-error *ngIf="email.invalid">{{
         getErrorMessage("email")
       }}</mat-error>
+      <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
     </mat-form-field>
 
     <mat-form-field appearance="outline">
@@ -29,8 +30,8 @@
         getErrorMessage("password")
       }}</mat-error>
     </mat-form-field>
-    <button mat-flat-button (click)="signIn()" [disabled]="!isValid">
-      Sign In
+    <button mat-flat-button (click)="signUp()" [disabled]="!isValid">
+      Sign Up
     </button>
   </div>
 </div>

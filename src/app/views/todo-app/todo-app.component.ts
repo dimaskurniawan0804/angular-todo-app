@@ -35,15 +35,14 @@ export class TodoAppComponent implements OnInit {
             b.updated_at.seconds * 1000 + b.updated_at.nanoseconds / 1000000;
           return updatedTimeB - updatedTimeA; // Descending order, use updatedTimeA - updatedTimeB for ascending order
         });
-        console.log(this.todoList);
       },
     });
 
     this.todoService.fetchRandomQuote().subscribe({
       next: (res) => {
-        console.log(res, 'AA');
+        console.log(res, 'random quote');
       },
-      error: (err) => console.log(err),
+      error: (err) => console.error(err),
     });
   }
 
@@ -64,7 +63,6 @@ export class TodoAppComponent implements OnInit {
   }
 
   openDetail(todoId: string, action: string) {
-    console.log(action);
     if (action === 'edit') {
       this.isEdit = true;
       const findTodo = this.todoList.filter((el) => el.id === todoId);

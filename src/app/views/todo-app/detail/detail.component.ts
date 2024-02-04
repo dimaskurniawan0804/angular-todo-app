@@ -50,7 +50,7 @@ export class DetailComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['isEdit']) {
-      console.log('YAHA');
+      console.log('onchange >>');
     }
   }
 
@@ -68,12 +68,10 @@ export class DetailComponent implements OnInit, OnChanges {
       updated_at: new Date(),
       user_uid: this.todo.user_uid,
     };
-    console.log(payload);
     this.todoService.updateTodo(payload);
   }
 
   createNewTodo() {
-    // this.getErrorMessage()
     const payload = {
       id: uuidv4(),
       title: this.title.value,
@@ -83,7 +81,6 @@ export class DetailComponent implements OnInit, OnChanges {
       updated_at: new Date(),
       user_uid: sessionStorage.getItem('user_uid') ?? '',
     };
-    console.log(payload);
     this.todoService.addTodo(payload);
   }
 

@@ -10,6 +10,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotFoundComponent } from '../404/not-found.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment';
+import { AuthGuard } from 'src/app/guard/auth.guard';
+import { ViewGuard } from 'src/app/guard/view.guard';
+import { Router } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -27,6 +32,8 @@ import { NotFoundComponent } from '../404/not-found.component';
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
+  providers: [AuthGuard, ViewGuard],
 })
 export class AuthModule {}

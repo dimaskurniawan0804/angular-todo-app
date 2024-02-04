@@ -1,0 +1,70 @@
+.todo-main {
+  //   background-color: pink;
+  &_header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 8px;
+    border-bottom: 1px solid white;
+    padding-bottom: 8px;
+    align-items: center;
+
+    p {
+      color: white;
+    }
+    &_left {
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+      align-items: center;
+      .text {
+        :first-child {
+          color: red;
+          font-size: 36px;
+        }
+        :last-child {
+          color: white;
+        }
+      }
+    }
+  }
+
+  &_tab {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  &_list {
+    width: 100%;
+    // background-color: pink;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 300px;
+    overflow: auto;
+    &_item {
+      padding: 16px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      &_left {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        align-items: center;
+        .title {
+          font-size: 24px;
+        }
+        .title:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  &_detail {
+  }
+}

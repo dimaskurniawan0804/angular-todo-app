@@ -1,6 +1,10 @@
+import { user } from '@angular/fire/auth';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
+import { TodoService } from 'src/app/services/todo.service';
+import { v4 as uuidv4 } from 'uuid';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,7 +19,11 @@ export class LoginComponent implements OnInit {
   ]);
 
   isValid = false;
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private todoService: TodoService
+  ) {
     this.email.statusChanges.subscribe(() => {
       this.updateIsValid();
     });
@@ -29,7 +37,14 @@ export class LoginComponent implements OnInit {
     this.isValid = this.email.valid && this.password.valid;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // console.log(this.todoService.getTodos());
+    this.todoService.getTodos('KM2PKsOQfEXAgwCFp1lDuXbZ6R92').subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+    });
+  }
 
   getErrorMessage(input: string) {
     if (input === 'email') {
@@ -53,8 +68,23 @@ export class LoginComponent implements OnInit {
   signIn() {
     this.authService.signIn(this.email.value, this.password.value).subscribe({
       next: (res) => {
-        console.log(res);
-        localStorage.setItem('isLogin', 'true');
+        sessionStorage.setItem('user_uid', res.user._delegate.uid);
+        sessionStorage.setItem(
+          'user_displayName',
+          res.user._delegate.displayName
+        );
+
+        this.router.navigate(['todo']);
+
+        // this.todoService.addTodo({
+        //   title: 'Test Title New',
+        //   description: 'YAHA TEST',
+        //   is_done: false,
+        //   created_at: new Date(),
+        //   updated_at: new Date(),
+        //   user_uid: sessionStorage.getItem('user_uid') ?? '',
+        //   id: uuidv4(),
+        // });
       },
       error: (error) => {
         console.log(error);

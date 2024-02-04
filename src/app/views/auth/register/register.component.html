@@ -11,6 +11,15 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
+      <mat-label>Displayname</mat-label>
+      <input matInput placeholder="username" [formControl]="displayname" />
+      <mat-error *ngIf="email.invalid">{{
+        getErrorMessage("displayname")
+      }}</mat-error>
+      <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
       <mat-label>Password</mat-label>
       <input
         matInput

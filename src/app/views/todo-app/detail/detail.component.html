@@ -1,1 +1,22 @@
-<p>detail works!</p>
+<div id="todo-app-detail-wrapper">
+  <mat-form-field appearance="outline">
+    <mat-label>Title</mat-label>
+    <input matInput [formControl]="title" />
+    <mat-error *ngIf="title.invalid">{{ getErrorMessage("title") }}</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Description</mat-label>
+    <textarea matInput [formControl]="description"></textarea>
+    <mat-error *ngIf="description.invalid">{{
+      getErrorMessage("description")
+    }}</mat-error>
+  </mat-form-field>
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="isEdit ? updateTodo() : createNewTodo()"
+    [disabled]="!isValid"
+  >
+    {{ isEdit ? "Update" : "Submit" }}
+  </button>
+</div>

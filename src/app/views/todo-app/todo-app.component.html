@@ -1,1 +1,68 @@
-<p>todo-app works!</p>
+<div id="main-wrapper" class="bg-glass">
+  <div class="todo-main_header" style="margin-bottom: 8px; padding: 8px">
+    <div class="todo-main_header_left">
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/6348/6348058.png"
+        alt=""
+        style="width: 80px; height: 80px"
+      />
+      <div class="text">
+        <p>TODO LIST</p>
+        <p>Create your list</p>
+      </div>
+    </div>
+    <div class="todo-main_header_right">
+      <p>{{ time }}</p>
+    </div>
+  </div>
+  <div class="todo-main_tab">
+    <button mat-flat-button color="primary" (click)="isOpenDetail = false">
+      List
+    </button>
+    <button mat-flat-button color="primary" (click)="openDetail('new', 'new')">
+      New ToDo
+    </button>
+  </div>
+  <!--CONTENT-->
+  <div class="todo-main_list" *ngIf="!isOpenDetail">
+    <div
+      *ngFor="let item of todoList"
+      class="todo-main_list_item bg-glass"
+      style="border-width: 2px"
+      [style]="{ 'border-color': item.is_done ? 'rgb(64, 176, 64)' : 'red' }"
+    >
+      <div class="todo-main_list_item_left">
+        <button
+          matTooltip="Delete this todo"
+          mat-mini-fab
+          color="warn"
+          aria-label="Example icon button with a home icon"
+          (click)="deleteTodoById(item.id)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+        <div class="flex-column">
+          <p class="title" (click)="openDetail(item.id ? item.id : '', 'edit')">
+            {{ item.title }}
+          </p>
+          <small>{{ item.is_done ? "Complete" : "Uncomplete" }}</small>
+        </div>
+      </div>
+      <button
+        [matTooltip]="
+          item.is_done ? 'Change to uncomplete' : 'Change to complete'
+        "
+        mat-mini-fab
+        [class]="!item.is_done ? 'button-success' : 'button-danger'"
+        aria-label="Example icon button with a home icon"
+        (click)="updateTodoStatus(!item.is_done, item.id)"
+      >
+        <mat-icon>{{ !item.is_done ? "done" : "close" }}</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="todo-main_detail" *ngIf="isOpenDetail">
+    <app-detail [todo]="selectedTodo" [isEdit]="isEdit"></app-detail>
+  </div>
+</div>

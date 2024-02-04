@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class RegisterComponent implements OnInit {
   hide = false;
   email = new FormControl('', [Validators.required, Validators.email]);
+  displayname = new FormControl('', [Validators.required]);
   password = new FormControl('', [
     Validators.required,
     Validators.minLength(6),
@@ -48,13 +49,18 @@ export class RegisterComponent implements OnInit {
       return this.password.hasError('minlength') ? 'Minimal 6 characters' : '';
     }
 
+    if (input === 'displayname') {
+      return 'You must enter a value';
+    }
+
     return;
   }
 
   signUp() {
-    console.log('click sign up');
     this.authService.signUp(this.email.value, this.password.value).subscribe({
-      next: (result) => console.log(result),
+      next: (result) => {
+        result.user.updateProfile({ displayName: this.displayname.value });
+      },
       error: (err) => window.alert(err.message),
     });
   }

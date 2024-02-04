@@ -9,11 +9,12 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
     // Check if user is logged in based on localStorage
-    const isLoggedIn = !!localStorage.getItem('isLoggedIn');
+    const isLoggedIn = sessionStorage.getItem('user_uid');
 
     // If user is logged in, navigate to dashboard
     if (isLoggedIn) {
-      this.router.navigate(['/dashboard']);
+      // console.log('YAHA');
+      this.router.navigate(['todo']);
       return false; // Prevents activating the route
     }
 

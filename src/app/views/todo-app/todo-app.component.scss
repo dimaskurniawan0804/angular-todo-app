@@ -1,5 +1,4 @@
 .todo-main {
-  //   background-color: pink;
   &_header {
     display: flex;
     flex-direction: row;
@@ -34,6 +33,37 @@
     flex-direction: row;
     gap: 8px;
     margin-bottom: 8px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    .right,
+    .left {
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+    }
+    .right {
+      padding-right: 16px;
+    }
+    // div {
+    //   width: 70%;
+    //   white-space: nowrap;
+    //   overflow: hidden;
+    //   border-radius: 0;
+    //   .move {
+    //     display: inline-block;
+    //     animation: runningText 50s linear infinite;
+    //   }
+
+    //   @keyframes runningText {
+    //     0% {
+    //       // transform: translateX(100%);
+    //     }
+    //     100% {
+    //       transform: translateX(-100%);
+    //     }
+    //   }
+    // }
   }
 
   &_list {
@@ -44,6 +74,14 @@
     gap: 8px;
     height: 300px;
     overflow: auto;
+    &_empty {
+      color: white;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
     &_item {
       padding: 16px;
       display: flex;

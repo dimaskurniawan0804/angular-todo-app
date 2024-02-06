@@ -1,21 +1,67 @@
 #login-main-wrapper {
   /* From https://css.glass */
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.48);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(6.7px);
+  -webkit-backdrop-filter: blur(6.7px);
+  border: 1px solid rgba(255, 255, 255, 1);
   padding: 16px;
   border-radius: 10px;
-
-  h5 {
-    font-weight: 700;
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  .input-area {
+  width: 40vw;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  justify-content: space-between;
+  animation: in 2s;
+  .left-side {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    text-align: center;
+    font-style: italic;
+    line-height: 18px;
+  }
+  .right-side {
+    h5 {
+      font-weight: 700;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .input-area {
+      display: flex;
+      flex-direction: column;
+      &_action {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+        small {
+          font-size: 14px;
+          font-weight: 700;
+          span {
+            text-decoration: underline;
+          }
+          span:hover {
+            cursor: pointer;
+            color: white;
+            transition: 0.5s;
+          }
+        }
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  @keyframes in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 }

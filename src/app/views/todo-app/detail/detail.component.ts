@@ -1,20 +1,15 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TodoService, Todo } from 'src/app/services/todo.service';
 import { FormControl, Validators } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
 })
-export class DetailComponent implements OnInit, OnChanges {
+export class DetailComponent implements OnInit {
   @Input() todo: Todo = {
     id: '',
     title: '',
@@ -31,7 +26,7 @@ export class DetailComponent implements OnInit, OnChanges {
   description = new FormControl('', [Validators.required]);
   isValid = false;
 
-  constructor(private todoService: TodoService) {
+  constructor(private todoService: TodoService, private snackbar: MatSnackBar) {
     this.title.statusChanges.subscribe(() => {
       this.updateIsValid();
     });
@@ -48,14 +43,21 @@ export class DetailComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['isEdit']) {
-      console.log('onchange >>');
-    }
-  }
-
   private updateIsValid() {
     this.isValid = this.title.valid && this.description.valid;
+  }
+
+  openSnackBar(message: string, action: string, duration: number = 2000) {
+    return new Promise((resolve) => {
+      const config = new MatSnackBarConfig();
+      config.verticalPosition = 'top';
+      config.duration = duration;
+      let snackBar = this.snackbar.open(message, action, config);
+      snackBar.afterDismissed().subscribe({
+        next: () => resolve(''),
+        complete: () => resolve(''),
+      });
+    });
   }
 
   updateTodo() {
@@ -68,7 +70,12 @@ export class DetailComponent implements OnInit, OnChanges {
       updated_at: new Date(),
       user_uid: this.todo.user_uid,
     };
-    this.todoService.updateTodo(payload);
+    this.todoService.updateTodo(payload).then(() => {
+      this.openSnackBar('Success update this todo', 'ok!', 2000).then(() => {
+        this.emitChangeTab();
+        this.isEdit = false;
+      });
+    });
   }
 
   createNewTodo() {
@@ -81,7 +88,12 @@ export class DetailComponent implements OnInit, OnChanges {
       updated_at: new Date(),
       user_uid: sessionStorage.getItem('user_uid') ?? '',
     };
-    this.todoService.addTodo(payload);
+    this.todoService.addTodo(payload).then(() => {
+      this.openSnackBar('Success create new todo', 'ok!', 2000).then(() => {
+        this.emitChangeTab();
+        this.isEdit = false;
+      });
+    });
   }
 
   getErrorMessage(input: string) {
@@ -99,5 +111,10 @@ export class DetailComponent implements OnInit, OnChanges {
     }
 
     return;
+  }
+
+  @Output() openList = new EventEmitter<string>();
+  emitChangeTab() {
+    this.openList.emit('change to list');
   }
 }

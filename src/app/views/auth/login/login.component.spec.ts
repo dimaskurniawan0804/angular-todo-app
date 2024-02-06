@@ -11,6 +11,8 @@ import {
   HttpHandler,
 } from '@angular/common/http';
 import { TodoService } from 'src/app/services/todo.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Overlay } from '@angular/cdk/overlay';
 
 const angularFireAuthStub = {
   authState: of(null),
@@ -42,6 +44,8 @@ describe('LoginComponent', () => {
         HttpClientModule,
         HttpHandler,
         TodoService,
+        MatSnackBar,
+        Overlay,
         { provide: AngularFireAuth, useValue: angularFireAuthStub },
         { provide: AngularFirestore, useValue: angularFirestoreStub },
       ],

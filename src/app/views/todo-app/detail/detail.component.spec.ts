@@ -3,13 +3,14 @@ import { DetailComponent } from './detail.component';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { of } from 'rxjs';
-import { RouterModule } from '@angular/router';
 import {
   HttpClient,
   HttpClientModule,
   HttpHandler,
 } from '@angular/common/http';
 import { TodoService } from 'src/app/services/todo.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Overlay } from '@angular/cdk/overlay';
 
 const angularFireAuthStub = {
   authState: of(null),
@@ -39,6 +40,8 @@ describe('DetailComponent', () => {
         HttpClientModule,
         HttpHandler,
         TodoService,
+        MatSnackBar,
+        Overlay,
         { provide: AngularFireAuth, useValue: angularFireAuthStub },
         { provide: AngularFirestore, useValue: angularFirestoreStub },
       ],

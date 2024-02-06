@@ -15,6 +15,7 @@ import { environment } from 'src/environments/environment';
 import { AuthGuard } from 'src/app/guard/auth.guard';
 import { ViewGuard } from 'src/app/guard/view.guard';
 import { Router } from '@angular/router';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { Router } from '@angular/router';
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
+    MatSnackBarModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
   providers: [AuthGuard, ViewGuard],

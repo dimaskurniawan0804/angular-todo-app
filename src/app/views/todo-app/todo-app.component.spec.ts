@@ -9,6 +9,7 @@ import {
   HttpHandler,
 } from '@angular/common/http';
 import { TodoService } from 'src/app/services/todo.service';
+import { RouterModule } from '@angular/router';
 
 const angularFireAuthStub = {
   authState: of(null),
@@ -41,6 +42,7 @@ describe('TodoAppComponent', () => {
         { provide: AngularFireAuth, useValue: angularFireAuthStub },
         { provide: AngularFirestore, useValue: angularFirestoreStub },
       ],
+      imports: [RouterModule.forRoot([])],
     }).compileComponents();
 
     angularFirestore = TestBed.inject(AngularFirestore);

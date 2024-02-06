@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TodoService } from 'src/app/services/todo.service';
 
 @Component({
   selector: 'app-register',
@@ -15,9 +18,17 @@ export class RegisterComponent implements OnInit {
     Validators.required,
     Validators.minLength(6),
   ]);
-
   isValid = false;
-  constructor(private authService: AuthService) {
+  randomQuote = {
+    author: 'DimKur',
+    content: 'Take a break and buy a coffee',
+  };
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private todoService: TodoService
+  ) {
     this.email.statusChanges.subscribe(() => {
       this.updateIsValid();
     });
@@ -25,6 +36,8 @@ export class RegisterComponent implements OnInit {
     this.password.statusChanges.subscribe(() => {
       this.updateIsValid();
     });
+
+    this.fetchRandomQuote();
   }
 
   private updateIsValid() {
@@ -60,8 +73,37 @@ export class RegisterComponent implements OnInit {
     this.authService.signUp(this.email.value, this.password.value).subscribe({
       next: (result) => {
         result.user.updateProfile({ displayName: this.displayname.value });
+        let snackBarShow = this.snackBar.open(
+          'Success! You will direct to Login Page',
+          'ok!',
+          {
+            duration: 2000,
+          }
+        );
+        snackBarShow.afterDismissed().subscribe({
+          next: () => {
+            this.directToSignIn();
+          },
+        });
       },
       error: (err) => window.alert(err.message),
+    });
+  }
+
+  directToSignIn() {
+    this.router.navigate(['auth/sign-in']);
+  }
+
+  fetchRandomQuote() {
+    this.todoService.fetchRandomQuote().subscribe({
+      next: (res: any) => {
+        this.randomQuote.content = res.content;
+        this.randomQuote.author = res.author;
+      },
+      error: () => {
+        this.randomQuote.content = 'Take a break and buy a coffee';
+        this.randomQuote.author = 'DimKur';
+      },
     });
   }
 }

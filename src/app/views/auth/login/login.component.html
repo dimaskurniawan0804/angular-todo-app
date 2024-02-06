@@ -1,36 +1,50 @@
 <div id="login-main-wrapper">
-  <h5>Sign In</h5>
-  <div class="input-area">
-    <mat-form-field appearance="outline">
-      <mat-label>Email</mat-label>
-      <input matInput placeholder="username" [formControl]="email" />
-      <mat-error *ngIf="email.invalid">{{
-        getErrorMessage("email")
-      }}</mat-error>
-    </mat-form-field>
+  <div class="left-side">
+    <p class="author">~{{ randomQuote.author }}~</p>
+    <br />
+    <p class="quote">`{{ randomQuote.content }}`</p>
+    <br />
+  </div>
+  <div class="right-side">
+    <h5>Sign In</h5>
+    <div class="input-area">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="username" [formControl]="email" />
+        <mat-error *ngIf="email.invalid">{{
+          getErrorMessage("email")
+        }}</mat-error>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Password</mat-label>
-      <input
-        matInput
-        [type]="hide ? 'password' : 'text'"
-        [formControl]="password"
-      />
-      <button
-        mat-icon-button
-        matSuffix
-        (click)="hide = !hide"
-        [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hide"
-      >
-        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
-      </button>
-      <mat-error *ngIf="password.invalid">{{
-        getErrorMessage("password")
-      }}</mat-error>
-    </mat-form-field>
-    <button mat-flat-button (click)="signIn()" [disabled]="!isValid">
-      Sign In
-    </button>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          [type]="hide ? 'password' : 'text'"
+          [formControl]="password"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+        <mat-error *ngIf="password.invalid">{{
+          getErrorMessage("password")
+        }}</mat-error>
+      </mat-form-field>
+      <div class="input-area_action">
+        <small
+          >Don't have an account yet?
+          <span (click)="directToSignUp()">Create one</span></small
+        >
+        <button mat-flat-button (click)="signIn()" [disabled]="!isValid">
+          Sign In
+        </button>
+      </div>
+    </div>
   </div>
 </div>

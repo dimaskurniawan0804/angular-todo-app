@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-// import { AuthService } from 'src/app/services/auth.service';
 import { TodoService, Todo } from 'src/app/services/todo.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-todo-app',
   templateUrl: './todo-app.component.html',
@@ -24,7 +24,7 @@ export class TodoAppComponent implements OnInit {
   };
   isEdit: boolean = false;
 
-  constructor(private todoService: TodoService) {
+  constructor(private todoService: TodoService, private router: Router) {
     this.generateTime();
     this.todoService.getTodos(this.user_uid).subscribe({
       next: (res) => {
@@ -36,13 +36,6 @@ export class TodoAppComponent implements OnInit {
           return updatedTimeB - updatedTimeA; // Descending order, use updatedTimeA - updatedTimeB for ascending order
         });
       },
-    });
-
-    this.todoService.fetchRandomQuote().subscribe({
-      next: (res) => {
-        console.log(res, 'random quote');
-      },
-      error: (err) => console.error(err),
     });
   }
 
@@ -84,5 +77,14 @@ export class TodoAppComponent implements OnInit {
       updated_at: new Date(),
     };
     this.todoService.updateTodoStatus(payload);
+  }
+
+  logout() {
+    sessionStorage.clear();
+    this.router.navigate(['auth']);
+  }
+
+  changeListTab(message: string) {
+    this.isOpenDetail = false;
   }
 }

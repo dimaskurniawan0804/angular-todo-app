@@ -8,3 +8,8 @@ $button-danger: rgb(206, 44, 44);
 .button-danger {
   background-color: $button-danger;
 }
+
+@import url("https://fonts.googleapis.com/css2?family=Happy+Monkey&display=swap");
+p {
+  font-family: "Happy Monkey", system-ui;
+}

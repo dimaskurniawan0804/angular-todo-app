@@ -26,6 +26,13 @@
         }
       }
     }
+    &_right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: end;
+      gap: 4px;
+    }
   }
 
   &_tab {
@@ -45,25 +52,6 @@
     .right {
       padding-right: 16px;
     }
-    // div {
-    //   width: 70%;
-    //   white-space: nowrap;
-    //   overflow: hidden;
-    //   border-radius: 0;
-    //   .move {
-    //     display: inline-block;
-    //     animation: runningText 50s linear infinite;
-    //   }
-
-    //   @keyframes runningText {
-    //     0% {
-    //       // transform: translateX(100%);
-    //     }
-    //     100% {
-    //       transform: translateX(-100%);
-    //     }
-    //   }
-    // }
   }
 
   &_list {

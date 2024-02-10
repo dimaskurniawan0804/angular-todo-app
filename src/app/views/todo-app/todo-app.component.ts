@@ -23,6 +23,7 @@ export class TodoAppComponent implements OnInit {
     user_uid: 'string',
   };
   isEdit: boolean = false;
+  displayname = sessionStorage.getItem('user_displayName');
 
   constructor(private todoService: TodoService, private router: Router) {
     this.generateTime();

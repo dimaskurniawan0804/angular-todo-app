@@ -103,10 +103,11 @@ export class LoginComponent implements OnInit {
   fetchRandomQuote() {
     this.todoService.fetchRandomQuote().subscribe({
       next: (res: any) => {
-        this.randomQuote.content = res.content;
-        this.randomQuote.author = res.author;
+        this.randomQuote.content = res[0].quote;
+        this.randomQuote.author = res[0].author;
       },
-      error: () => {
+      error: (err) => {
+        console.log(err);
         this.randomQuote.content = 'Take a break and buy a coffee';
         this.randomQuote.author = 'DimKur';
       },

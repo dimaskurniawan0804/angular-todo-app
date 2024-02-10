@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
-import { catchError, filter, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 export interface Todo {
   id: string;
@@ -58,10 +59,15 @@ export class TodoService {
   }
 
   fetchRandomQuote() {
-    return this.http.get('https://api.quotable.io/random').pipe(
-      catchError((error) => {
-        throw error;
-      })
-    );
+    const headers = new HttpHeaders({
+      'X-Api-Key': environment.keyApiNinja,
+    });
+    return this.http
+      .get('https://api.api-ninjas.com/v1/quotes', { headers })
+      .pipe(
+        catchError((error) => {
+          throw error;
+        })
+      );
   }
 }

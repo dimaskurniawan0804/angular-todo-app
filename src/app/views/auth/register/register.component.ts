@@ -36,15 +36,15 @@ export class RegisterComponent implements OnInit {
     this.password.statusChanges.subscribe(() => {
       this.updateIsValid();
     });
-
-    this.fetchRandomQuote();
   }
 
   private updateIsValid() {
     this.isValid = this.email.valid && this.password.valid;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.fetchRandomQuote();
+  }
 
   getErrorMessage(input: string) {
     if (input === 'email') {

@@ -44,10 +44,12 @@ describe('RegisterComponent', () => {
   const spyAuthService = jasmine.createSpyObj('AuthService', ['signUp']);
 
   spyTodoService.fetchRandomQuote.and.returnValue(
-    of({
-      content: 'Test',
-      author: 'Test',
-    })
+    of([
+      {
+        quote: 'Test',
+        author: 'Test',
+      },
+    ])
   );
 
   beforeEach(async () => {
@@ -91,7 +93,7 @@ describe('RegisterComponent', () => {
 
   it('should call signUp method in AuthService', () => {
     const spySignUp = spyAuthService.signUp;
-    spyAuthService.signUp.and.returnValue(of(/* some value */));
+    spyAuthService.signUp.and.returnValue(of());
     component.email.setValue('test@mail.com');
     component.displayname.setValue('test');
     component.password.setValue('password');

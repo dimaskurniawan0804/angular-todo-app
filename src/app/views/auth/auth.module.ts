@@ -9,7 +9,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NotFoundComponent } from '../404/not-found.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { AuthGuard } from 'src/app/guard/auth.guard';
@@ -18,12 +17,7 @@ import { Router } from '@angular/router';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-    AuthComponent,
-    RegisterComponent,
-    NotFoundComponent,
-  ],
+  declarations: [LoginComponent, AuthComponent, RegisterComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,

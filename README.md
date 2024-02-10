@@ -1,27 +1,34 @@
-# TodoApp
+# Todo App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.1.
+This is a simple todo application built using Angular 13.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Login and Register using firebase authentication
+- Add new todos (firebase store)
+- Mark todos as completed
+- Delete todos
 
-## Code scaffolding
+## Installation
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Clone the repository:
 
-## Build
+2. Navigate into the project directory:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+3. Install dependencies:
 
-## Running unit tests
+   npm install
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Usage
 
-## Running end-to-end tests
+1. Run the development server:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+   ng serve
 
-## Further help
+2. SSR DEV
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+   npm run build
+
+   npm run dev:ssr
+
+3. Open your browser and visit `http://localhost:4200` to view the app.
